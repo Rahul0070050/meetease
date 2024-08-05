@@ -27,7 +27,6 @@ jobs:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd meetease
-            npm install
-            npm run build
+          run: cd meetease
+          run: npm install
+          run: npm run build
