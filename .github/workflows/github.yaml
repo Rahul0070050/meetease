@@ -1,12 +1,14 @@
-name: Deploy the server
+name: Push-to-EC2
 
+# Trigger deployment only on push to main branch
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
+    name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
 
     steps:
@@ -29,5 +31,4 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd meetease
-            npm install
             npm run build
