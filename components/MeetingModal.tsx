@@ -13,14 +13,16 @@ import { Button } from "./ui/button";
 
 interface MeetingModalProps {
   isOpen: boolean;
-  title: string;
-  className: string;
-  buttonText: string;
-  buttonIcon: string;
-  children: ReactNode;
-  image: string;
   onClose: () => void;
-  handleClick: () => void;
+  title: string;
+  className?: string;
+  children?: ReactNode;
+  handleClick?: () => void;
+  buttonText?: string;
+  instantMeeting?: boolean;
+  image?: string;
+  buttonClassName?: string;
+  buttonIcon?: string;
 }
 function MeetingModal({
   isOpen,
@@ -36,7 +38,7 @@ function MeetingModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="flex w-full max-w-[520px] flex-col gap-6 border-none bg-dark-1 px-6 py-9 text-white">
-        <div className="flex flex-cal gap-6">
+        <div className="flex flex-cal gap-6 justify-center">
           {image && (
             <div className="flex justify-center">
               <Image src={image} alt={image} width={72} height={72} />
