@@ -10,6 +10,7 @@ import { useUser } from "@clerk/nextjs";
 import { useToast } from "./ui/use-toast";
 import { Textarea } from "./ui/textarea";
 import ReactDatePicker from "react-datepicker";
+import { Input } from "./ui/input";
 
 function MeetingTypeList() {
   const { toast } = useToast();
@@ -47,6 +48,7 @@ function MeetingTypeList() {
       const startsAt =
         values.dateTime.toISOString() || new Date().toISOString();
       const description = values.description || "Instant meeting";
+
       await call.getOrCreate({
         data: {
           starts_at: startsAt,
@@ -163,12 +165,25 @@ function MeetingTypeList() {
         title="Start an instant meeting"
         className="text-center"
         buttonIcon=""
-        children
         image=""
         buttonText="Start Meeting"
         onClose={() => setMeetingState(undefined)}
         handleClick={createMeeting}
       />
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        title="Type the link here"
+        className="text-center"
+        buttonText="Joining Meeting"
+        onClose={() => setMeetingState(undefined)}
+        handleClick={() => router.push(values.link)}
+      >
+        <Input
+          placeholder="Meeting Link"
+          className="border-none bg-dark-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+          onChange={(e) => setValues({ ...values, link: e.target.value })}
+        />
+      </MeetingModal>
     </section>
   );
 }

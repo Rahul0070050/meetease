@@ -19,7 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";
 
@@ -30,6 +30,7 @@ function MeetingRoom() {
   const [layout, setLauOut] = useState<CallLayOutType>("speaker-left");
   const [showParticipants, setShowShoParticipants] = useState(false);
   const { useCallCallingState } = useCallStateHooks();
+  const router = useRouter();
 
   const callingState = useCallCallingState();
   if (callingState !== CallingState.JOINED) return <Loader />;
@@ -58,7 +59,11 @@ function MeetingRoom() {
         </div>
       </div>
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap p-5">
-        <CallControls />
+        <CallControls
+          onLeave={() => {
+            router.push("/");
+          }}
+        />
 
         <DropdownMenu>
           <div className="flex items-center">
