@@ -29,8 +29,9 @@ function MeetingRoom() {
   const isPersonalRoom = !!searchParams.get("personal");
   const [layout, setLauOut] = useState<CallLayOutType>("speaker-left");
   const [showParticipants, setShowShoParticipants] = useState(false);
-  const { useCallCallingState } = useCallStateHooks();
+  const { useCallCallingState, useCameraState } = useCallStateHooks();
   const router = useRouter();
+  const { camera } = useCameraState();
 
   const callingState = useCallCallingState();
   if (callingState !== CallingState.JOINED) return <Loader />;
@@ -61,6 +62,7 @@ function MeetingRoom() {
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap p-5">
         <CallControls
           onLeave={() => {
+            camera.disable();
             router.push("/");
           }}
         />
