@@ -20,7 +20,7 @@ function HomeLayout({ children }: { children: ReactNode }) {
           <div className="w-full">{children}</div>
         </section>
       </div>
-      Footer
+      {/* Footer */}
     </main>
   );
 }

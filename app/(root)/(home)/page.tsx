@@ -1,4 +1,5 @@
 import MeetingTypeList from "@/components/MeetingTypeList";
+import moment from "moment-timezone";
 import React from "react";
 
 function Home() {
@@ -6,10 +7,12 @@ function Home() {
   const date = new Intl.DateTimeFormat("en-IN", { dateStyle: "full" }).format(
     now
   );
-  const time = now.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const momentNow = moment();
+  const time = momentNow.tz("Asia/Kolkata").format("HH:mm A");
+  // const time = momentNow.toLocaleTimeString("en-IN", {
+  //   hour: "2-digit",
+  //   minute: "2-digit",
+  // });
   return (
     <section className="flex size-full flex-col gap-10 text-white">
       <div className="h-[300px] w-full rounded-[20px] bg-hero bg-cover">
